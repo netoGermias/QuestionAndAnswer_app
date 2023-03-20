@@ -14,3 +14,8 @@ tmp_files/
 *.ai
 *.psd
 *.pdf
+
+
+public/css/*.css
+public/js/*.js
+

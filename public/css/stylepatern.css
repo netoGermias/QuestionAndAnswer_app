@@ -1,3 +1,15 @@
 h2{
     color:rgb(46, 129, 236);
 }
+
+#formPergunta{
+    margin-top: 5vh;
+}
+
+#logoguia{
+    margin-left: 2vh;
+}
+
+body{
+    background-color: #dce3e4;
+}

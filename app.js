@@ -1,26 +1,27 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-app.get("/", function(req, res){
-    var nome = "Jhon Doe";
-    var showTheMsg = false;
+// body-parser setting
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 
-    var product = [
-        {name: "Milk", price: 1.99},
-        {name: "Biscuit", price: 3.85},
-        {name: "Meat", price: 99.55},
-        {name: "kniff", price: 0.96},
-    ]
-    
-    res.render("index", {
-        nome: nome,
-        data: 20032023,
-        showTheMsg,
-        product,
-    });
+app.get("/questions", (req, res)=>{
+    var titulo = req.body.titulo;
+    var descricao = req.body.descricao;
+
+   // res.render("A sua pergunta" + titulo + " e a descricao " + descricao);
 });
 
+app.get("/", function(req, res){
+    res.render("index")
+});
+
+app.post("/questiondid", (req, res)=>{
+    console.log("It's stated");
+    res.send("someone did a question!");
+});
 app.listen(3000, ()=>{console.log("You started the server on http:localhost:3000");});

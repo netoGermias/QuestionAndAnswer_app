@@ -10,6 +10,10 @@ h2{
     margin-left: 2vh;
 }
 
+#card_lt{
+    margin-bottom: 3vh;
+}
+
 body{
     background-color: #dce3e4;
 }

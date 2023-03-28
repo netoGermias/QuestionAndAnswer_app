@@ -4,6 +4,7 @@ const app = express();
 
 const connectdb = require('./database/database');
 const modelQuestion = require('./database/modelQuestion'); 
+const question = require("./database/modelQuestion");
 
 // database connectdb
 connectdb
@@ -28,14 +29,25 @@ app.get("/questions", (req, res)=>{
 });
 
 app.get("/", function(req, res){
-    res.render("index")
+    question.findAll({raw:true})
+        .then(questiondid => {
+            console.log(questiondid);
+            res.render("index", {questiondid: questiondid});
+        })
 });
 
 app.post("/questiondid", (req, res)=>{
     var titulo = req.body.titulo;
     var descricao = req.body.descricao;
     
-    console.log("It's stated");
-    res.send("A sua pergunta" + titulo + " e a descricao " + descricao);
+    question.create({
+        title: titulo,
+        description: descricao,
+    }).then(() => {
+        res.redirect("/")
+    })
+    
+    // console.log("It's stated");
+    // res.send("A sua pergunta" + titulo + " e a descricao " + descricao);
 });
 app.listen(3000, ()=>{console.log("You started the server on http:localhost:3000");});

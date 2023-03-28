@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const connectdb = require('./database/database');
+const modelQuestion = require('./database/modelQuestion'); 
 
 // database connectdb
 connectdb

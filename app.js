@@ -2,6 +2,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
+const connectdb = require('./database/database');
+
+// database connectdb
+connectdb
+    .authenticate()
+    .then(() => {
+        console.log("Db connected!!");
+    })
+    .catch((msgError) => {
+        console.log(msgError);
+    })
+
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
@@ -10,10 +22,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.get("/questions", (req, res)=>{
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
-
-   // res.render("A sua pergunta" + titulo + " e a descricao " + descricao);
+    
+    res.render("questions");
 });
 
 app.get("/", function(req, res){
@@ -21,7 +31,10 @@ app.get("/", function(req, res){
 });
 
 app.post("/questiondid", (req, res)=>{
+    var titulo = req.body.titulo;
+    var descricao = req.body.descricao;
+    
     console.log("It's stated");
-    res.send("someone did a question!");
+    res.send("A sua pergunta" + titulo + " e a descricao " + descricao);
 });
 app.listen(3000, ()=>{console.log("You started the server on http:localhost:3000");});

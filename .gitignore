@@ -19,3 +19,5 @@ tmp_files/
 public/css/*.css
 public/js/*.js
 
+*.lock
+*.log

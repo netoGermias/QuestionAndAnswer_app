@@ -1,8 +1,8 @@
 const sequelize = require('sequelize');
 
-const connection = new sequelize('dbQAnswer', 'root', '@PassDataCom99',
+const connection = new sequelize('dbQAnswer', 'root', 'myDb88_',
 {
-    host: 'localhost',
+    host: '172.17.0.2',
     dialect: 'mysql'
 });
 

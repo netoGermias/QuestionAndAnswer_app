@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const connectdb = require('./database/database');
-const modelQuestion = require('./database/modelQuestion'); 
+const answer = require('./database/modelAnswer');
 const question = require("./database/modelQuestion");
 
 // database connectdb
@@ -50,4 +50,36 @@ app.post("/questiondid", (req, res)=>{
     // console.log("It's stated");
     // res.send("A sua pergunta" + titulo + " e a descricao " + descricao);
 });
+
+app.get("/question/:id", (req, res) => {
+    var idquestion = req.params.id;
+    question.findOne({
+        where:{id:idquestion}
+    }).then(question => {
+        if(question != undefined ){
+            answer.findAll({
+                where:{ id: idquestion}
+            }).then(answer => {
+                res.render("question", {question:question, answer: answer})
+                
+            });
+
+        }else{
+            res.redirect("/")
+        }
+    })
+})
+
+app.post("/answer", (req, res) => {
+    const answerQ = req.body.bodyanswer;
+    const idquestion = req.body.idquestion;
+
+    answer.create({
+        body: answerQ,
+        questionid: idquestion
+    }).then(() => {
+        res.redirect("/question/" + idquestion )
+    })
+})
+
 app.listen(3000, ()=>{console.log("You started the server on http:localhost:3000");});

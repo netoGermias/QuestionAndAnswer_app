@@ -15,6 +15,7 @@ tmp_files/
 *.psd
 *.pdf
 
+*.txt
 
 public/css/bootstrap*.css
 public/js/bootstrapp*.js

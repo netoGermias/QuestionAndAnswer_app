@@ -16,8 +16,8 @@ tmp_files/
 *.pdf
 
 
-public/css/*.css
-public/js/*.js
+public/css/bootstrap*.css
+public/js/bootstrapp*.js
 
 *.lock
 *.log
